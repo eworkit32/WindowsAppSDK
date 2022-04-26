@@ -12,7 +12,7 @@ STDAPI WindowsAppRuntime_IsSelfContained(
     BOOL* isSelfContained) noexcept try
 {
     *isSelfContained = FALSE;
-
+#if 0
     const UINT32 flags{ PACKAGE_FILTER_HEAD | PACKAGE_FILTER_DIRECT | PACKAGE_FILTER_STATIC | PACKAGE_FILTER_DYNAMIC | PACKAGE_INFORMATION_BASIC };
     uint32_t packageInfoCount{};
     const PACKAGE_INFO* packageInfo{};
@@ -30,6 +30,7 @@ STDAPI WindowsAppRuntime_IsSelfContained(
 
     // Didn't find the Windows App SDK framework package in the package graph. We're self-contained!
     *isSelfContained = TRUE;
+#endif
     return S_OK;
 }
 CATCH_RETURN();
