@@ -132,6 +132,16 @@ void BaseTestSuite::MultipleChannelClose()
     VERIFY_THROWS_HR(result.Channel().Close(), WPN_E_CHANNEL_CLOSED);
 }
 
+void BaseTestSuite::VerifyAppNotificationContentBuilder()
+{
+    auto contentBuilder{ AppNotificationContentBuilder() };
+    contentBuilder.AddText(L"Message");
+
+    auto xmlPayload{ contentBuilder.GetXml() };
+
+    VERIFY_ARE_EQUAL(L"<toast>Message</toast>", xmlPayload);
+}
+
 void BaseTestSuite::VerifyRegisterAndUnregister()
 {
     RegisterWithPushNotificationManager();

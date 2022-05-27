@@ -17,12 +17,14 @@
     <Midl Include="$(MSBuildThisFileDirectory)PushNotifications.idl" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)AppNotificationContentBuilder.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationChannel.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationCreateChannelResult.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)PushNotificationReceivedEventArgs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)AppNotificationContentBuilder.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)externs.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PushBackgroundTaskInstance.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)PushNotificationChannel.h" />

@@ -19,6 +19,11 @@ void UnpackagedTests::MultipleChannelClose()
     BaseTestSuite::MultipleChannelClose();
 }
 
+void UnpackagedTests::VerifyAppNotificationContentBuilder()
+{
+    BaseTestSuite::VerifyAppNotificationContentBuilder();
+}
+
 void UnpackagedTests::VerifyRegisterAndUnregister()
 {
     BaseTestSuite::VerifyRegisterAndUnregister();

@@ -98,4 +98,14 @@ namespace Microsoft.Windows.PushNotifications
         // Event handler for Push Notifications
         event Windows.Foundation.TypedEventHandler<PushNotificationManager, PushNotificationReceivedEventArgs> PushReceived;
     };
+
+    [contract(PushNotificationsContract, 1)]
+    runtimeclass AppNotificationContentBuilder
+    {
+        AppNotificationContentBuilder();
+
+        String GetXml();
+
+        void AddText(String text);
+    };
 }
