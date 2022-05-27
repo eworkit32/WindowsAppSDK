@@ -1,4 +1,4 @@
-# Toast Builder
+# AppNotificationContentBuilder
 The C# Development Community has a [Toast Content Builder](https://docs.microsoft.com/en-us/dotnet/api/microsoft.toolkit.uwp.notifications?view=win-comm-toolkit-dotnet-7.0), which serves as a reference for this project.
 ## MVP
 WindowsAppSDK v1.2 Development Schedule
@@ -8,6 +8,11 @@ Scenarios Filled in ADO | **May 16, 2022**
 Code Start | **June 10, 2022**
 Code Complete | **August 8, 2022**
 
+### Goal 
+- 
+### Non-Goals
+- Provide a solution that can build everything.
+  - Since developers can always retrive the content from the builder in XML, it's not necessary the builder supports every possible combinations.
 ### Class Constructor & GetXml
 Method | Description
 ---|---
@@ -29,14 +34,14 @@ AddArgument(String, String)	| Adds a key/value to the activation arguments that 
 We want devs to write something like this to post a toast:
 
 ``` c++
-auto contentBuilder{ new ToastContentBuilder()
+auto contentBuilder{ new AppNotificationContentBuilder()
     .AddImage(L"Path\\To\\MyLittleUnicorn.png", Placement::appLogoOverride, Crop::Circle)
     .AddText(L"Toast Notification with Avatar Image")
     .AddText(L"This is an example message using content builder")
     .AddButton(L"Open App", L"OpenAppAction")
     .AddArgument(L"Sequnce", L"1234") };
 
-auto toast{ new AppNotification(contentBuilder.GetXml()) };
+auto appNotification{ new AppNotification(contentBuilder.GetXml()) };
 AppNotificationManager.Default.Show(toast);
 ```
 
@@ -59,12 +64,29 @@ Which would produce the equivalent to:
 </toast>
 ```
 
+The proposed solution also includes a `Show` method that can replace
+``` c++
+auto appNotification{ new AppNotification(contentBuilder.GetXml()) };
+AppNotificationManager.Default.Show(toast);
+```
+and let the caller construct and present the AppNotification in a single operation. 
+
+``` c++
+AppNotificationContentBuilder()
+    .AddImage(L"Path\\To\\MyLittleUnicorn.png", Placement::appLogoOverride, Crop::Circle)
+    .AddText(L"Toast Notification with Avatar Image")
+    .AddText(L"This is an example message using content builder")
+    .AddButton(L"Open App", L"OpenAppAction")
+    .AddArgument(L"Sequnce", L"1234")
+    .Show();
+```
+The `Show` methods is a convenience function (defined later in this document) and as wouldn't normaly be part of the MVP but, given how trivial the implementation is, could easily be provided with the first release.
 ### Toast Notification with Input Text Box
 
 We want devs to write something like this to post a toast with an input text box and associated button:
 
 ``` c++
-auto contentBuilder{ new ToastContentBuilder()
+auto contentBuilder{ new AppNotificationContentBuilder()
     .AddImage(L"Path\\To\\MyLittleUnicorn.png", Placement::appLogoOverride, Crop::Circle)
     .AddText(L"Toast Notification with Avatar Image")
     .AddText(L"This is an example message using content builder")
