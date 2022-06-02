@@ -8,12 +8,40 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
 {
     hstring AppNotificationContentBuilder::GetXml()
     {
-        winrt::hstring xmlPayload{ L"<toast>" + m_text + L"</toast>" };
-        return xmlPayload;
+        std::wstring xmlPayload{ L"<toast>" };
+
+        if (!m_text1.empty())
+        {
+            xmlPayload.append(m_text1);
+        }
+
+        if (!m_text2.empty())
+        {
+            xmlPayload.append(L";");
+            xmlPayload.append(m_text2);
+        }
+
+        xmlPayload.append(L"</toast>");
+
+        return hstring(xmlPayload);
     }
 
     void AppNotificationContentBuilder::AddText(hstring text)
     {
-        m_text = text;
+        if (m_text1.empty())
+        {
+            m_text1 = text;
+        }
+        else
+        {
+            m_text2 = text;
+        }
+    }
+
+    winrt::Microsoft::Windows::PushNotifications::AppNotificationContentBuilder AppNotificationContentBuilder::AddTextFluent(hstring text)
+    {
+        AddText(text);
+
+        return *this;
     }
 }

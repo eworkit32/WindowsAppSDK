@@ -25,6 +25,7 @@ class BaseTestSuite
         void MultipleChannelClose(); // Currently failing
         void VerifyAppNotificationContentBuilder();
         void VerifyAppNotificationFluentContentBuilder();
+        void VerifyAppNotificationFluentWrapperContentBuilder();
         void VerifyRegisterAndUnregister();
         void VerifyRegisterAndUnregisterAll();
         void VerifyUnregisterFails();

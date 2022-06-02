@@ -10,9 +10,11 @@ namespace winrt::Microsoft::Windows::PushNotifications::implementation
         hstring GetXml();
 
         void AddText(hstring text);
+        winrt::Microsoft::Windows::PushNotifications::AppNotificationContentBuilder AddTextFluent(hstring text);
 
     private:
-        hstring m_text{};
+        std::wstring m_text1{};
+        std::wstring m_text2{};
     };
 }
 namespace winrt::Microsoft::Windows::PushNotifications::factory_implementation

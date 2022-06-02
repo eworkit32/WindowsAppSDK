@@ -29,6 +29,11 @@ void UnpackagedTests::VerifyAppNotificationFluentContentBuilder()
     BaseTestSuite::VerifyAppNotificationFluentContentBuilder();
 }
 
+void UnpackagedTests::VerifyAppNotificationFluentWrapperContentBuilder()
+{
+    BaseTestSuite::VerifyAppNotificationFluentWrapperContentBuilder();
+}
+
 void UnpackagedTests::VerifyRegisterAndUnregister()
 {
     BaseTestSuite::VerifyRegisterAndUnregister();

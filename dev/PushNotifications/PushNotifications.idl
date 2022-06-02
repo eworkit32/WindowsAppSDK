@@ -107,5 +107,6 @@ namespace Microsoft.Windows.PushNotifications
         String GetXml();
 
         void AddText(String text);
+        AppNotificationContentBuilder AddTextFluent(String text);
     };
 }

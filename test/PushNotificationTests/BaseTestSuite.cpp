@@ -147,21 +147,32 @@ void BaseTestSuite::MultipleChannelClose()
 
 void BaseTestSuite::VerifyAppNotificationContentBuilder()
 {
-    auto contentBuilder{ AppNotificationContentBuilder() };
-    contentBuilder.AddText(L"Message");
+    auto builder{ AppNotificationContentBuilder() };
+    builder.AddText(L"Message1");
+    builder.AddText(L"Message2");
 
-    auto xmlPayload{ contentBuilder.GetXml() };
+    auto xmlPayload{ builder.GetXml() };
 
-    VERIFY_ARE_EQUAL(L"<toast>Message</toast>", xmlPayload);
+    VERIFY_ARE_EQUAL(L"<toast>Message1;Message2</toast>", xmlPayload);
 }
-
 void BaseTestSuite::VerifyAppNotificationFluentContentBuilder()
 {
-    auto xmlPayload{ AppNotificationFluentContentBuilder()
-        .AddText(L"Message")
+    auto xmlPayload{ AppNotificationContentBuilder()
+        .AddTextFluent(L"Message1")
+        .AddTextFluent(L"Message2")
         .GetXml() };
 
-    VERIFY_ARE_EQUAL(L"<toast>Message</toast>", xmlPayload);
+    VERIFY_ARE_EQUAL(L"<toast>Message1;Message2</toast>", xmlPayload);
+}
+
+void BaseTestSuite::VerifyAppNotificationFluentWrapperContentBuilder()
+{
+    auto xmlPayload{ AppNotificationFluentContentBuilder()
+        .AddText(L"Message1")
+        .AddText(L"Message2")
+        .GetXml() };
+
+    VERIFY_ARE_EQUAL(L"<toast>Message1;Message2</toast>", xmlPayload);
 }
 
 void BaseTestSuite::VerifyRegisterAndUnregister()
