@@ -19,6 +19,19 @@ using namespace winrt::Windows::Storage;
 using namespace winrt::Windows::System;
 using namespace winrt::Microsoft::Windows::PushNotifications;
 
+class AppNotificationFluentContentBuilder
+{
+public:
+    AppNotificationFluentContentBuilder() {}
+
+    AppNotificationFluentContentBuilder& AddText(winrt::hstring text) { builder.AddText(text); return *this; }
+
+    winrt::hstring GetXml() { return builder.GetXml(); };
+
+private:
+    AppNotificationContentBuilder builder;
+};
+
 void BaseTestSuite::ClassSetup()
 {
     ::Test::Bootstrap::SetupPackages();
@@ -138,6 +151,15 @@ void BaseTestSuite::VerifyAppNotificationContentBuilder()
     contentBuilder.AddText(L"Message");
 
     auto xmlPayload{ contentBuilder.GetXml() };
+
+    VERIFY_ARE_EQUAL(L"<toast>Message</toast>", xmlPayload);
+}
+
+void BaseTestSuite::VerifyAppNotificationFluentContentBuilder()
+{
+    auto xmlPayload{ AppNotificationFluentContentBuilder()
+        .AddText(L"Message")
+        .GetXml() };
 
     VERIFY_ARE_EQUAL(L"<toast>Message</toast>", xmlPayload);
 }
